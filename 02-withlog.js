@@ -15,7 +15,12 @@ const withLog = new WithLog();
 withLog.on("end", () => console.log("end with execute"));
 withLog.on("begin", () => console.log("About to execute"));
 
-withLog.execute(() => console.log("---executing task---"));
+// withLog.execute(() => console.log("---executing task---"));
+withLog.execute(() => {
+    setImmediate(() => {
+        console.log("---executing task---")
+    })
+});
 
 withLog.emit("begin");
 
