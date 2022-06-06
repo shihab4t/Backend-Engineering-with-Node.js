@@ -6,4 +6,6 @@ Backend Engineering with Node.js (Tecognize Training)
 
 ## Class 12
 
-- Project requirements: [requirements.txt](./requirements.txt)
+- Task
+  - Project requirements: [requirements.txt](./requirements.txt)
+  - Project repo: https://github.com/shihab4t/e-commerce-backend-system
