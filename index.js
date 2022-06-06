@@ -6,7 +6,8 @@ const userRouter = require("./routes/user.routes");
 const { MONGODB_URI } = require("./utils/config.util");
 const notFoundHandler = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
-const { infoLogger, errorLogger } = require("./utils/logger.util");
+// const { infoLogger, errorLogger } = require("./utils/logger.util");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -21,13 +22,14 @@ mongoose
 app.use(express.json());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
-app.use(infoLogger());
+app.use(morgan("dev"))
+// app.use(infoLogger());
 
 app.use("/api/students", studentRouter);
 app.use("/api/teachers", teacherRouter);
 app.use("/api/users", userRouter);
 
-app.use(errorLogger());
+// app.use(errorLogger());
 
 app.use(notFoundHandler);
 app.use(errorHandler);

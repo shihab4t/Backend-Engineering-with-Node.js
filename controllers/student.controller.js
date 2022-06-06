@@ -4,6 +4,7 @@ const _ = require("lodash");
 const validate = require("./../middlewares/validate");
 const updateStudentSchema = require("../schemas/update.student.schema");
 const createStudentSchema = require("../schemas/create.student.schema");
+const redis = require("./../services/redis.service");
 
 const getStudents = async (req, res) => {
     try {
@@ -24,13 +25,19 @@ const createStudent = async (req, res, next) => {
     }
 };
 
-const getStudentDetails = async (req, res) => {
+const getStudentDetails = async (req, res, next) => {
     const id = req.params.id;
     try {
         const student = await Student.findById(id);
-        if (student) return res.status(200).send(student);
+        console.log("--- fetching from database ---");
+        if (student) {
+            const rid = id;
+            await redis.set({ key: rid, value: JSON.stringify(student) })
+            return res.status(200).send(student)
+        };
         return res.status(404).send("no data found");
     } catch (err) {
+        console.log(err);
         return next(new InternalServerError(err.message));
     }
 };

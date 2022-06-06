@@ -9,6 +9,7 @@ const {
     studentUpdateValidate
 } = require("../controllers/student.controller");
 const admin = require("../middlewares/admin");
+const cache = require("../middlewares/cache");
 const authenticate = require("./../middlewares/authenticate");
 
 studentRouter.route("/")
@@ -17,7 +18,7 @@ studentRouter.route("/")
 
 studentRouter
     .route("/:id")
-    .get(getStudentDetails)
+    .get([cache], getStudentDetails)
     .patch([studentUpdateValidate, authenticate], updateStudent)
     .delete([authenticate, admin], deleteStudent);
 
