@@ -8,6 +8,7 @@ const notFoundHandler = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
 // const { infoLogger, errorLogger } = require("./utils/logger.util");
 const morgan = require("morgan");
+const fakeRouter = require("./routes/fake.routes");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(morgan("dev"))
 app.use("/api/students", studentRouter);
 app.use("/api/teachers", teacherRouter);
 app.use("/api/users", userRouter);
+app.use("/api/fakes/", fakeRouter);
 
 // app.use(errorLogger());
 
