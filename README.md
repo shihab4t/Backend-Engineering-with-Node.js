@@ -9,6 +9,7 @@ Backend Engineering with Node.js (Tecognize Training)
 - Links
   - https://jsonplaceholder.typicode.com
   - https://github.com/psimanta/e-commerce-node
+  - https://github.com/tporadowski/redis/releases
 - Tools
   - Redis
 - npm package
