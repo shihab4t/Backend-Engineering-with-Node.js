@@ -8,7 +8,8 @@ Backend Engineering with Node.js (Tecognize Training)
   - Unit Testing
   - Integration Testing
   - End to End
-- Links
+- Tools
+  - ndb
 - npm package
   - jest
-- Task
+  - supertest

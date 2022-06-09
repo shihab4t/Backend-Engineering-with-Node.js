@@ -1,13 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const { MONGODB_URI } = require("./utils/config.util");
+const { MONGODB_URI, NODE_ENV } = require("./utils/config.util");
+const { connectToMongoDB } = require("./utils/db.util");
 
 const app = express();
 
-mongoose
-    .connect(MONGODB_URI)
-    .then(() => console.log("Connected to MongoDB!"))
-    .catch((err) => console.error("MongoDB Connection Failed"));
+connectToMongoDB();
 
 require("./middlewares").beforeRoutes(app);
 require("./routes")(app);

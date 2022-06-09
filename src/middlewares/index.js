@@ -3,6 +3,7 @@ const morgan = require("morgan");
 // const { infoLogger, errorLogger } = require("./utils/logger.util");
 const notFoundHandler = require("./notFoundHandler");
 const errorHandler = require("./errorHandler");
+const { NODE_ENV } = require("../utils/config.util");
 
 const beforeRoutes = app => {
     // req, res
@@ -11,7 +12,7 @@ const beforeRoutes = app => {
     app.use(express.json());
     app.use(express.static("public"));
     app.use(express.urlencoded({ extended: true }));
-    app.use(morgan("dev"))
+    if (NODE_ENV !== "testing") app.use(morgan("dev"))
     // app.use(infoLogger());
 };
 
