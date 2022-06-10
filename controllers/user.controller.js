@@ -2,6 +2,29 @@ const User = require("../models/user.model");
 const crypto = require("../utils/crypto.util");
 const jwt = require("../utils/jwt.util");
 const { InternalServerError } = require("../utils/error.util");
+const formidable = require("formidable");
+
+const fs = require("node:fs/promises");
+const path = require("node:path");
+
+const fileUpload = async (req, res, next) => {
+    const from = formidable({ multiples: true });
+
+    from.parse(req, async (err, fields, files) => {
+        if (err) return next(new InternalServerError(err));
+        try {
+            const tmppath = files["test-file"].filepath;
+            const filepath = path.join(path.normalize(__dirname + "/../files/"), files["test-file"].originalFilename);
+            console.log(filepath);
+            const data = await fs.readFile(tmppath);
+            await fs.writeFile(filepath, data.toString());
+
+            res.status(201).send("File upload successful");
+        } catch (err2) {
+            return next(new InternalServerError(err2));
+        }
+    })
+}
 
 const createUser = async (req, res, next) => {
     try {
@@ -48,4 +71,4 @@ const loginUser = async (req, res, next) => {
     }
 };
 
-module.exports = { createUser, loginUser };
+module.exports = { createUser, loginUser, fileUpload };

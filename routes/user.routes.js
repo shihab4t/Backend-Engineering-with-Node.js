@@ -1,7 +1,9 @@
-const { createUser, loginUser } = require("../controllers/user.controller");
+const { createUser, loginUser, fileUpload } = require("../controllers/user.controller");
 
 const userRouter = require("express").Router();
 
+userRouter.route("/upload")
+    .post(fileUpload)
 userRouter.route("/register")
     .post(createUser);
 
