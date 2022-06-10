@@ -20,4 +20,4 @@ Backend Engineering with Node.js (Tecognize Training)
   - multer
 - Task
   - [x] 01: practice redis caching with jsonplaceholder fake data api
-  - 02: binary file like image uploads
+  - [x] 02: text file uploads with formidable
